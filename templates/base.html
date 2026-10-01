@@ -1,0 +1,38 @@
+{% load static %}<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="لوحة شرف مركز الوهاب لتحفيظ القرآن الكريم، نكرّم فيها المتميزين في حفظ القرآن الكريم وتلاوته من طلاب الفروع المختلفة.">
+    <meta name="theme-color" content="#4A3320">
+    <title>{% block title %}لوحة الشرف | مركز الوهاب لتحفيظ القرآن الكريم{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'img/favicon.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <img class="logo" src="{% static 'img/logo.png' %}" alt="شعار مركز الوهاب لتحفيظ القرآن الكريم">
+            <div class="header-text">
+                <h1 class="site-title">مركز الوهاب لتحفيظ القرآن الكريم</h1>
+                <p class="site-tagline">همّة عالية وخطوات ثابتة</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p class="footer-name">مركز الوهاب لتحفيظ القرآن الكريم</p>
+            <p class="footer-note">شكرًا لأساتذتنا وأولياء الأمور على دعمهم المتواصل، بارك الله فيهم ونفع بهم.</p>
+        </div>
+    </footer>
+</body>
+</html>

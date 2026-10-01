@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="intro">
+    <h2 class="section-title">لوحة الشرف</h2>
+    <p class="intro-line">بارك الله فيهم ونفع بهم — هنا نكرّم المتميزين في حفظ القرآن الكريم وتلاوته من جميع الفروع.</p>
+</section>
+
+{% if branches %}
+<nav class="filters" aria-label="التصفية حسب الفرع">
+    <a class="pill{% if not selected_branch %} active{% endif %}" href="{% url 'student_list' %}">الكل</a>
+    {% for branch in branches %}
+    <a class="pill{% if selected_branch.pk == branch.pk %} active{% endif %}" href="{% url 'student_list' %}?branch={{ branch.pk }}">{{ branch.name }}</a>
+    {% endfor %}
+</nav>
+{% endif %}
+
+{% if students %}
+<div class="grid">
+    {% for student in students %}
+    <article class="card">
+        {% if student.photo %}
+        <img class="avatar" src="{{ student.photo.url }}" alt="صورة {{ student.name }}" loading="lazy" width="108" height="108">
+        {% else %}
+        <span class="avatar avatar--placeholder" aria-hidden="true">{{ student.first_letter }}</span>
+        {% endif %}
+        <h3 class="student-name">{{ student.name }}</h3>
+        <span class="branch-badge">{{ student.branch.name }}</span>
+        <p class="achievement">{{ student.achievement }}</p>
+    </article>
+    {% endfor %}
+</div>
+
+{% if page_obj.paginator.num_pages > 1 %}
+<nav class="pagination" aria-label="التنقل بين الصفحات">
+    {% if prev_url %}
+    <a class="page-link" href="{{ prev_url }}" rel="prev"><span aria-hidden="true">→</span> السابق</a>
+    {% else %}
+    <span class="page-link page-link--disabled">السابق</span>
+    {% endif %}
+    <span class="page-status">صفحة {{ page_obj.number }} من {{ page_obj.paginator.num_pages }}</span>
+    {% if next_url %}
+    <a class="page-link" href="{{ next_url }}" rel="next">التالي <span aria-hidden="true">←</span></a>
+    {% else %}
+    <span class="page-link page-link--disabled">التالي</span>
+    {% endif %}
+</nav>
+{% endif %}
+
+{% else %}
+<section class="empty">
+    <span class="empty-mark" aria-hidden="true">✦</span>
+    <h3 class="empty-title">لا توجد أسماء في اللوحة بعد</h3>
+    <p class="empty-text">ستُضاف أسماء الطلاب المتميزين قريبًا بإذن الله، بارك الله فيكم.</p>
+</section>
+{% endif %}
+{% endblock %}

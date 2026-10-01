@@ -1,0 +1,409 @@
+/* ==========================================================================
+   Honor Board — لوحة الشرف | مركز الوهاب لتحفيظ القرآن الكريم
+   Palette tuned to the center's logo (warm chocolate, beige, soft gold and
+   the dark olive green of the logo's calligraphy).
+   ========================================================================== */
+
+:root {
+    /* Brand palette */
+    --chocolate: #4A3320;              /* main: headings, header title, active pills */
+    --chocolate-deep: #362416;         /* hover / darker accents */
+    --beige: #F4EFE4;                  /* page background */
+    --cream: #FBF8F1;                  /* header and card surfaces */
+    --gold: #C7A659;                   /* soft gold: decorative accents */
+    --gold-deep: #7F6420;              /* gold that is safe for text (achievements) */
+    --gold-soft: #E7DBB9;              /* pale gold: rings, borders, dividers */
+    --olive: #465A46;                  /* dark olive (from the logo): card strip, badges */
+    --olive-soft: rgba(70, 90, 70, 0.10);
+    --olive-border: rgba(70, 90, 70, 0.38);
+    --ink: #32271B;                    /* body text */
+    --muted: #77685A;                  /* secondary text */
+    --card-border: rgba(74, 51, 32, 0.10);
+    --shadow-rest: 0 1px 3px rgba(74, 51, 32, 0.06);
+    --shadow-hover: 0 14px 30px rgba(74, 51, 32, 0.14);
+    --radius-card: 18px;
+    --radius-pill: 999px;
+    --font: "Tajawal", "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--beige);
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.75;
+}
+
+img {
+    max-width: 100%;
+}
+
+.container {
+    max-width: 1140px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+}
+
+a {
+    color: var(--chocolate);
+}
+
+a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--cream);
+    border-bottom: 1px solid var(--gold-soft);
+    box-shadow: 0 2px 14px rgba(74, 51, 32, 0.05);
+}
+
+.header-inner {
+    display: flex;
+    flex-direction: column;   /* phones: logo above the name */
+    align-items: center;
+    gap: 0.4rem;
+    padding-block: 0.9rem;
+    text-align: center;
+}
+
+/* The logo is displayed as-is: fixed height, automatic width, no cropping,
+   no recoloring — only gently rounded corners on its own square. */
+.logo {
+    display: block;
+    height: 58px;
+    width: auto;
+    border-radius: 14px;
+    border: 1px solid var(--card-border);
+}
+
+.site-title {
+    margin: 0;
+    color: var(--chocolate);
+    font-size: clamp(1.15rem, 4vw, 1.6rem);
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.site-tagline {
+    margin: 0.1rem 0 0;
+    color: var(--gold-deep);
+    font-size: 0.92rem;
+    font-weight: 500;
+}
+
+@media (min-width: 640px) {
+    .header-inner {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.1rem;
+        text-align: start;
+    }
+
+    .logo {
+        height: 72px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Intro
+   -------------------------------------------------------------------------- */
+.intro {
+    text-align: center;
+    padding-top: 2.4rem;
+}
+
+.section-title {
+    margin: 0;
+    color: var(--chocolate);
+    font-size: clamp(1.7rem, 5vw, 2.25rem);
+    font-weight: 800;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 68px;
+    height: 3px;
+    margin: 0.65rem auto 0;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(to left, var(--gold), var(--gold-soft));
+}
+
+.intro-line {
+    max-width: 36rem;
+    margin: 1rem auto 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+}
+
+/* --------------------------------------------------------------------------
+   Branch filter pills
+   -------------------------------------------------------------------------- */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.8rem;
+}
+
+.pill {
+    display: inline-block;
+    padding: 0.42rem 1.35rem;
+    border: 1.5px solid var(--card-border);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--chocolate);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.pill:hover {
+    background: var(--cream);
+    border-color: var(--gold-soft);
+}
+
+.pill.active {
+    background: var(--chocolate);
+    border-color: var(--chocolate);
+    color: var(--cream);
+    font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   Student cards grid
+   -------------------------------------------------------------------------- */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 1.6rem;
+}
+
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.4rem;
+    }
+}
+
+@media (min-width: 960px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1240px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.3rem 1.3rem 1.7rem;
+    background: var(--cream);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-rest);
+    text-align: center;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Thin dark-olive strip along the top edge of each card. */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: var(--olive);
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.avatar {
+    display: block;
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold-soft);
+    background: var(--beige);
+}
+
+.avatar--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--chocolate);
+    background: linear-gradient(135deg, var(--beige), var(--gold-soft));
+}
+
+.student-name {
+    margin: 0.95rem 0 0.35rem;
+    color: var(--chocolate);
+    font-size: 1.22rem;
+    font-weight: 700;
+    overflow-wrap: break-word;
+}
+
+.branch-badge {
+    display: inline-block;
+    padding: 0.12rem 0.9rem;
+    border: 1px solid var(--olive-border);
+    border-radius: var(--radius-pill);
+    background: var(--olive-soft);
+    color: var(--olive);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.achievement {
+    margin: 0.85rem 0 0;
+    color: var(--gold-deep);
+    font-size: 1.04rem;
+    font-weight: 700;
+    overflow-wrap: break-word;
+}
+
+/* --------------------------------------------------------------------------
+   Empty state
+   -------------------------------------------------------------------------- */
+.empty {
+    margin-top: 1.6rem;
+    padding: 3.6rem 1.5rem;
+    background: var(--cream);
+    border: 1.5px dashed var(--gold-soft);
+    border-radius: var(--radius-card);
+    text-align: center;
+}
+
+.empty-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--gold-soft);
+    color: var(--gold-deep);
+    font-size: 1.6rem;
+}
+
+.empty-title {
+    margin: 1rem 0 0.4rem;
+    color: var(--chocolate);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.empty-text {
+    max-width: 30rem;
+    margin: 0 auto;
+    color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   Pagination
+   -------------------------------------------------------------------------- */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2.2rem;
+    padding-bottom: 1rem;
+}
+
+.page-link {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border: 1.5px solid var(--card-border);
+    border-radius: var(--radius-pill);
+    color: var(--chocolate);
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.page-link:hover {
+    background: var(--cream);
+    border-color: var(--gold-soft);
+}
+
+.page-link--disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.page-status {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+    margin-top: 3.2rem;
+    padding: 2rem 0 2.6rem;
+    background: var(--cream);
+    border-top: 1px solid var(--gold-soft);
+    text-align: center;
+}
+
+.footer-name {
+    margin: 0 0 0.3rem;
+    color: var(--chocolate);
+    font-weight: 700;
+}
+
+.footer-note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility: respect reduced-motion preferences
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+
+    .card:hover {
+        transform: none;
+    }
+}
